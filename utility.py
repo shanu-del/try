@@ -118,7 +118,10 @@ def getOTNPrerequisite(path):
     except Exception as e:
         print("Error in getOTNPrerequisite funtion -->"+str(e))
 
-
+@app.route('/blog_post', methods=['POST'])
+def create():
+  
+    createLink(request.get_data('parameter1'), request.get_data('parameter2'))
 
 def createLink(link,serialImageName):
     try:
