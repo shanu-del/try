@@ -1,0 +1,29 @@
+body{
+    background-color: bisque;
+}
+#app {
+    font-size: x-large;
+}
+.table-header-row {
+    background-color: red;
+    color: bisque;
+}
+
+.button{
+    color: bisque;
+}
+.bisque{
+    color: bisque;
+}
+
+
+.btn-secondary{
+    background-color: orange;
+    color: bisque;
+}
+    
+.btn-secondary:hover {
+    background-color: #ffc500;
+    color: bisque;
+}
+
