@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Manual Backup</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="text-center bg-dark p-3 bisque col-12">Manual Upload</div>
+        </div>
+        <div class="d-flex input-group justify-content-center align-items-center p-3">
+            <input v-model="text1" id="text1" class="form-control" placeholder="Enter the image path">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">{{dropdown}}</button>
+            <div class="dropdown-menu"> 
+                <a class="dropdown-item" v-on:click="dropdown='updateKS1.zip'">Action</a> 
+                <a class="dropdown-item" v-on:click="dropdown='updateKS2.zip'">Another action</a> 
+                <a class="dropdown-item" v-on:click="dropdown='updateKS3.zip'">Something else here</a>
+                <a class="dropdown-item" v-on:click="dropdown='updateKS4.zip'">Separated link</a>
+            </div>
+            <div class="btn btn-primary" v-on:click="fn()" >Upload</div>
+        </div>
+        <!-- <div class="d-flex flex-column">
+            <div class="row d-flex justify-content-around align-content-center table-header-row">
+                <div class="col-2 d-flex justify-content-center p-3">Year</div>
+                <div class="col-2 d-flex justify-content-center p-3">Model</div>
+                <div class="col-2 d-flex justify-content-center p-3">Region</div>
+                <div class="col-2 d-flex justify-content-center p-3">Version</div>
+                <div class="col-3 d-flex justify-content-center p-3">Links</div>
+            </div>
+            <div class="row d-flex justify-content-around table-content-row" v-for="data in myData">
+                <div class="col-2 d-flex justify-content-center btn btn-secondary p-2 m-0 bisque">{{data.model}}</div>
+                <div class="col-2 d-flex justify-content-center btn btn-secondary p-2 m-0 bisque">{{data.year}}</div>
+                <div class="col-2 d-flex justify-content-center btn btn-secondary p-2 m-0 bisque">{{data.region}}</div>
+                <div class="col-2 d-flex justify-content-center btn btn-secondary p-2 m-0 bisque">{{data.version}}</div>
+                <div class="col-3 d-flex justify-content-center p-2 m-0 bisque">
+                    <div class="btn btn-primary flex-fill button" v-on:click="seriel(data.id)">Serial</div>
+                    <div>|</div>
+                    <div class="btn btn-success flex-fill button" v-on:click="usb(data.id)">USB</div>
+                </div>
+            </div> -->
+
+    </div>
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+<!--
+	<head>
+		<title>DOM manipulations</title>
+		<script type = "text/javascript">
+		function fn1(){
+			var str1=document.getElementById("text1").value;
+			var str2=document.getElementById("text2").value;
+			
+			if(str2.localeCompare("updateKS.zip") == 0 || str2.localeCompare("updateKSU.zip") == 0 || str2.localeCompare("updateNL.zip") == 0 || str2.localeCompare("updateNM.zip") == 0){
+			}else{
+				alert("invalid filename, enter again")	
+			}
+		}
+		
+		</script>
+	</head>
+	
+	<body>
+		<input id="text1" placeholder="Enter the image path">
+		<input id="text2" placeholder="Enter image filename ">
+		<button onclick="fn1()" id= "btn1">Upload</button>
+	</body>
+-->
+
+
+
+
+
+
+
+
+</html>
