@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://107.108.175.239:8000/mrt/prt_prt_uni -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./mrtcompare3_files/PRT.css">
+
+</head><body onload="loadComplete()"><div class="Header">
+	 <a class="navbar-brand" href="http://107.108.175.239:8000/">Product Intelligence Portal</a>
+	 <a class="nav-item" href="http://107.108.175.239:8000/mrt/">Home</a>
+	 <h1>MRT/PRT Comparison Tool</h1>
+	 <a class="nav-item1" href="http://107.108.175.239:8000/mrt/universal" )="">User Input</a>
+	 <h2>  </h2>
+	 <a class="nav-item2" href="http://107.108.175.239:8000/mrt/universal_server" )="">System Input</a>
+</div>
+	
+	<div id="firstPageButtons" style="height: 100%; display: none;">
+		<div class="compare">
+			<p>Select files to compare the PRT</p>
+		</div>
+	
+				<div class="uploadfile">
+				
+				<form id="files" class="fisrt_form" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrfmiddlewaretoken" value="zTgmOhuDnkBE7uxh58laVlSkibygPol7i0KUme53Gf4M0gHyQD8vCHRK8OElYWbL">
+                
+                <br>
+                <button class="button btn-secondary" id="decrpyt_file" type="submit">Process</button>
+            </form>
+				<div id="toprocess">
+					<input type="button" id="upload" value="Process" onclick="Process()" hidden="hidden">
+		        </div>
+			</div>
+				
+		
+	</div>
+	
+	<div id="filterDiv" style="display: block; position: absolute;">
+		<div id="selectDiv">
+			<div id="country">CURRENT Option
+			<select id="filter2"><option value="UA43T5310AKXXL">UA43T5310AKXXL</option></select>
+			</div>
+		
+		
+		
+			<div id="region">REFERENCE Option
+			<select id="filter1"><option value="UA32T4310AKXXL">UA32T4310AKXXL</option></select>	
+			</div>
+			
+			<div id="selecttask">Action</div>
+			<select id="Select"><option value="0">All Items</option><option value="1">Deleted Items</option><option value="2">New Items</option><option value="3">Different Items</option><option value="4">Similar Items</option></select>
+			<div id="result">Result</div>
+			<input type="button" id="upload1" value="Show Data" onclick="Compare()">
+			<button id="button1" onclick="exportTableToExcel()" style="display: block;">Export Table Data To Excel File</button>
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for detail.." title="Type in a name" style="display: block;">
+			<div id="Legend"></div>
+			<label for="Legend" id="label">Different Items</label>
+			<div id="REFFILE">Reference File :	</div>
+			<div id="CURRFILE">Current File : </div>
+			<div id="REFFILEVal">UA32T4310AKXXL.xls</div>
+			<div id="CURRFILEVal">UA43T5310AKXXL.xls</div>
+		
+			
+		</div>
+	</div>
+	<div id="hdExcel" style="display: block;"><table id="myTable1"><thead><tr><th class="detailCol">Model</th><th class="detailCol">Parameter</th><th>UA32T4310AKXXL</th><th>UA43T5310AKXXL</th></tr><tr><th class="detailCol">Details</th><th class="detailCol">Function</th><th class="headerRow">Reference</th><th class="headerRow">Current</th></tr></thead></table></div>
+	<div id="dvExcel" style="display: block;"><table border="1" id="myTable"><tbody><tr><td class="detailCol">General Information</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Product</td><td>Circuit</td><td>LED</td><td>LED</td></tr><tr><td class="detailCol">Country/Location</td><td>Circuit</td><td>INDIA</td><td>INDIA</td></tr><tr><td class="detailCol">Tools Support</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Display</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Screen Curvature</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Ultra Black</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Video</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Picture Engine</td><td>Circuit</td><td>Hyper Real</td><td>Hyper Real</td></tr><tr><td class="detailCol">Motion Rate</td><td>Circuit</td><td>50</td><td>50</td></tr><tr><td class="detailCol">10bit Support</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">HDR (High Dynamic Range)</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">HDR10+</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">HDR10+ Certified</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">HLG (Hybrid Log Gamma)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Contrast</td><td>Circuit</td><td>Mega Contrast</td><td>Mega Contrast</td></tr><tr><td class="detailCol">Color</td><td>Circuit</td><td>PurColor</td><td>PurColor</td></tr><tr><td class="detailCol">Dual LED</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Viewing Angle</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Micro Dimming</td><td>Circuit</td><td>Micro Dimming Pro</td><td>Micro Dimming Pro</td></tr><tr><td class="detailCol">Local Dimming</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Auto Depth Enhancer</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Contrast Enhancer</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Auto Motion Plus</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">LED Clear Motion</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Film Mode</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Picture</td><td>Circuit</td><td>HDMI Black Level</td><td>HDMI Black Level</td></tr><tr><td class="detailCol">Response Time</td><td>Circuit</td><td>8ms</td><td>8ms</td></tr><tr><td class="detailCol">Viewing Angle (H/V)</td><td>Circuit</td><td>178/178</td><td>178/178</td></tr><tr><td class="detailCol">Natural Mode Support</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Audio</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Dolby Digital Plus</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Dolby 5:1 Decoder</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Object Tracking Sound</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Q-Symphony</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Dialog Enhancement</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Audio Pre-selection Descriptor</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Hole Array Speaker</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Sound Output (RMS)</td><td>Circuit</td><td>20W(L:10W, R:10W)</td><td>20W(L:10W, R:10W)</td></tr><tr><td class="detailCol">Speaker Type</td><td>Circuit</td><td>2CH</td><td>2CH</td></tr><tr><td class="detailCol">Woofer</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Main Speaker Output (W)</td><td>Circuit</td><td>10W+10W</td><td>10W+10W</td></tr><tr><td class="detailCol">Woofer Speaker Output (W)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Tweeter Speaker Output (W)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">3D Speaker Output (W)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Multiroom Link</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Bluetooth Audio</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Smart Service</td><td>S/W</td><td></td><td></td></tr><tr><td class="detailCol">Smart TV Type</td><td>S/W</td><td>Smart</td><td>Smart</td></tr><tr><td class="detailCol">Operating System</td><td>S/W</td><td>Tizen™</td><td>Tizen™</td></tr><tr><td class="detailCol">Bixby</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Voice Interaction</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Far-Field Voice Interaction</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Multi Voice Assistant</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Works With Google Assistant</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Works With Alexa</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">TV Plus</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Web Browser</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">SmartThings App Support</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">SmartThings</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Samsung Health</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Universal Guide</td><td>S/W</td><td>Yes(India Only)</td><td>Yes(India Only)</td></tr><tr><td class="detailCol">Gallery</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">VESA Standard</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">VESA Spec</td><td>Mech.</td><td>200 x 200</td><td>200 x 200</td></tr><tr><td class="detailCol">Smart Feature</td><td>S/W</td><td></td><td></td></tr><tr><td class="detailCol">TV to Mobile - Mirroring</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Mobile to TV - Mirroring, DLNA</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">NFC on TV</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Tap View</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Device Graph</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Multi View</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Music Wall</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Personal Screen</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Remote Access</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Camera Support</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">360 Video Player</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">360 Camera Support</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Easy Setup</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">App Casting</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Wireless TV On - Samsung WOW</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Wired TV On - Samsung WOL</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Bluetooth Low Energy</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">WiFi Direct</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">TV Sound to Mobile</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Sound Mirroring</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Localization</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Tune Station</td><td>S/W</td><td>Yes (India Only)</td><td>Yes (India Only)</td></tr><tr><td class="detailCol">Auto Hotspot Connect</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">S-Share</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Auto Data Backup</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Dongle Compatibility (3G / LTE / WiFi)</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Analog Clean View</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Clean View</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Local Cinema Mode</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Triple Protection</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Feature</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Adaptive Picture</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Active Voice Amplifier</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Adaptive Sound</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">AI Streaming</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">AI Upscale</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Auto Rotation</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Art Mode</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Motion Detection</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Ambient Mode</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Brightness/Color  Detection</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Portrait Mode</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Instant On</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Accessibility - Voice Guide</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Accessibility - Learn TV Remote / Learn Menu Screen</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Accessibility - Others</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Digital Clean View</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Ultra Clean View</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Auto Channel Search</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Auto Power Off</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Caption (Subtitle)</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">ConnectShare™ (HDD)</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">ConnectShare™ (USB 2:0)</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Embeded POP</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">EPG</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Extended PVR</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Game Mode</td><td>Circuit</td><td>Yes (Basic)</td><td>Yes (Basic)</td></tr><tr><td class="detailCol">FreeSync</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">G-SYNC</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">IP Control</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">OSD Language</td><td>Circuit</td><td>Local</td><td>Local</td></tr><tr><td class="detailCol">Picture-In-Picture</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">BT HID Support</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">USB HID Support</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Teletext (TTX)</td><td>S/W</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Time Shift</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">One Connect box</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">V-Chip</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">MBR Support</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">IPv6 Support</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Additional Feature</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">System</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Digital Broadcasting</td><td>Circuit</td><td>DVB-T2</td><td>DVB-T2</td></tr><tr><td class="detailCol">DTV Sound System</td><td>Circuit</td><td>DD+</td><td>DD+</td></tr><tr><td class="detailCol">Analog Tuner</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Analog Tuner Type</td><td>Circuit</td><td>PAL-B/G, D/K, I, I/I'</td><td>PAL-B/G, D/K, I, I/I'</td></tr><tr><td class="detailCol">2 Tuner</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">CI (Common Interface)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Data Broadcasting</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">ATV Sound System</td><td>Circuit</td><td>BG,I,DK</td><td>BG,I,DK</td></tr><tr><td class="detailCol">TV Key</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Core Component</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">DDR SDRAM</td><td>Circuit</td><td>Nayna</td><td>Nayna</td></tr><tr><td class="detailCol">Flash Memory</td><td>Circuit</td><td>EMMC | 8G</td><td>EMMC | 8G</td></tr><tr><td class="detailCol">Serial Flash Memory</td><td>Circuit</td><td>WINBOND</td><td>WINBOND</td></tr><tr><td class="detailCol">HDMI Switch</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Display Device Vender</td><td>Circuit</td><td>BOE</td><td>BOE</td></tr><tr><td class="detailCol">Connectivity</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">HDMI</td><td>Circuit</td><td>2</td><td>2</td></tr><tr><td class="detailCol">DVI Support Port</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">MHL Support Port</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">USB</td><td>Circuit</td><td>1</td><td>1</td></tr><tr><td class="detailCol">Port 1 Type</td><td>Circuit</td><td>2.0</td><td>2.0</td></tr><tr><td class="detailCol">Port 2 Type</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Port 3 Type</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Component In (Y/Pb/Pr)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Composite In (AV)</td><td>Circuit</td><td>1</td><td>1</td></tr><tr><td class="detailCol">Ethernet (LAN)</td><td>Circuit</td><td>1</td><td>1</td></tr><tr><td class="detailCol">Audio Out (Mini Jack / LR)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Digital Audio Out (Optical)</td><td>Circuit</td><td>1</td><td>1</td></tr><tr><td class="detailCol">RF In (Terrestrial / Cable input / Satellite Input)</td><td>Circuit</td><td>1/1(Common Use for Terrestrial)/0</td><td>1/1(Common Use for Terrestrial)/0</td></tr><tr><td class="detailCol">Ex-Link ( RS-232C )</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">CI Slot</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Monitor Output</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">DVI</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">D-Sub Resolution</td><td>Circuit</td><td>N/A | N/A</td><td>N/A | N/A</td></tr><tr><td class="detailCol">HDMI A / Return Ch: Support</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">eARC</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">HDMI Quick Switch</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">WiFi</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Bluetooth</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Anynet+ (HDMI-CEC)</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Design</td><td>Mech.</td><td>Mold</td><td>Mold</td></tr><tr><td class="detailCol">Bezel Type</td><td>Mech.</td><td>VNB</td><td>VNB</td></tr><tr><td class="detailCol">Slim Type</td><td>Mech.</td><td>Slim</td><td>Slim</td></tr><tr><td class="detailCol">Speaker Jersey Color</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Light Effect (Deco)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Swivel (Left/Right)</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Eco</td><td>Development Support</td><td></td><td></td></tr><tr><td class="detailCol">Eco Sensor</td><td>Development Support</td><td>No</td><td>No</td></tr><tr><td class="detailCol">Power</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Power Supply (V)</td><td>Circuit</td><td>AC100-240V 50/60Hz</td><td>AC100-240V 50/60Hz</td></tr><tr><td class="detailCol">Peak Luminance Ratio (%)</td><td>Circuit</td><td>70</td><td>70</td></tr><tr><td class="detailCol">Yearly Power Consumption (EU standard) (kWh)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">AC Input Power Freq: (Hz)</td><td>Circuit</td><td>50/60Hz</td><td>50/60Hz</td></tr><tr><td class="detailCol">SMPS/IP Board</td><td>Circuit</td><td>SoluM</td><td>SoluM</td></tr><tr><td class="detailCol">Security</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">Dimension (WxHxD)</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">Stand Dim (WxD)</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">Weight</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">Loading Quantity</td><td>Mech.</td><td></td><td></td></tr><tr><td class="detailCol">Accessory</td><td>Circuit</td><td></td><td></td></tr><tr><td class="detailCol">Remote Controller Model</td><td>Circuit</td><td>TM1240A</td><td>TM1240A</td></tr><tr><td class="detailCol">Remote Controller Code No</td><td>Circuit</td><td>BN59-01315L</td><td>BN59-01315L</td></tr><tr><td class="detailCol">Batteries (for Remote Control)</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Samsung Smart Control (Included)</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">No Gap Wall-mount</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Optional Stand Support (Studio, Gravity)</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Optional Stand Support (Y20 Studio)</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">15m/10m One invisible connection Support</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Mini Wall Mount Support</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">VESA Wall Mount Support</td><td>Mech.</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">Customizable Frame Support</td><td>Mech.</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Composite to Scart Gender (Included)</td><td>S/W</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">User Manual</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">E-Manual</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">ANT-Cable</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Power Cable</td><td>Circuit</td><td>Yes</td><td>Yes</td></tr><tr><td class="detailCol">HDMI Cable</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr><tr><td class="detailCol">Slim Gender Cable</td><td>Circuit</td><td>N/A</td><td>N/A</td></tr></tbody></table></div>
+	
+	
+
+
+
+
+
+
+<script type="text/javascript" src="./mrtcompare3_files/xlsx.full.min.js.download"></script>
+<script type="text/javascript" src="./mrtcompare3_files/jszip.js.download"></script>
+<script src="./mrtcompare3_files/filesaver.js.download"></script>
+<script src="./mrtcompare3_files/jquery-3.4.1.min.js.download"></script>
+<script type="text/javascript">
+var file_1_path
+var file_2_path
+
+function upload(event) {
+    event.preventDefault();
+    var data = new FormData($('form').get(0));
+	// console.log($('form').get(0));
+    // console.log("Working");
+	// console.log(data)
+
+	$.ajax({
+		// url: $(this).attr('action'),
+		url: "/mrt/upload",
+		type: $(this).attr('method'),
+		data: data,
+		dataType: 'json',
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+			// // console.log(data);
+			file_1_path = data['path_first_file'];
+			file_2_path = data['path_second_file'];
+			// console.log(file_1_path, file_2_path);
+			// console.log('success');
+
+			$('#upload').click();
+		}
+	});
+	
+	
+    return false;
+}
+
+$(function() {
+	// // console.log(file_1_path, file_2_path);
+    $('form').submit(upload);
+	
+});
+	var data1 = [];
+	var data2 = [];
+	var filterValues = {};
+	var tableData = null;
+	var multipleNameCountriesMap = {};
+	var refDetailHeaderCol = null;
+	var tarDetailHeaderCol = null;
+	var refRegionRow = -1;
+	var tarRegionRow = -1;
+	var refFunCol = -1;
+    var tarFunCol = -1;
+	var refCol = -1;
+	var tarCol = -1;
+	var fileName1 = 'Refernce';
+	var fileName2 = 'Target';
+	// const uploadButton = document.querySelector('.browse-btn');
+	// const uploadButton1 = document.querySelector('.browse-btn1');
+	// const fileInfo = document.querySelector('.file-info');
+	// const fileInfo1 = document.querySelector('.file-info1');
+	// const realInput = document.getElementById('fileUpload1');
+	// const realInput1 = document.getElementById('fileUpload2');
+
+	// uploadButton.addEventListener('click', (e) => {
+	//   realInput.click();
+	// });
+	// uploadButton1.addEventListener('click', (e) => {
+	//   realInput1.click();
+	// });
+
+	// realInput.addEventListener('change', () => {
+	//   const name = realInput.value.split(/\\|\//).pop();
+	//   const truncated = name.length > 20 
+	// 	? name.substr(name.length - 20) 
+	// 	: name;
+	  
+	//   fileInfo.innerHTML = truncated;
+	// });
+	// realInput1.addEventListener('change', () => {
+	//   const name = realInput1.value.split(/\\|\//).pop();
+	//   const truncated = name.length > 20 
+	// 	? name.substr(name.length - 20) 
+	// 	: name;
+	  
+	//   fileInfo1.innerHTML = truncated;
+	// });
+	
+	
+	document.getElementById('loaderDiv').style.display = 'none';
+	function myFunction() {
+		// console.log('hello');
+		var input,
+		filter,
+		table,
+		tr,
+		td,
+		i,
+		txtValue;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
+	
+function loadComplete() {
+		var url1 = localStorage.getItem("url1");
+		var url2 =localStorage.getItem("url2");
+		Process(url1, url2);
+	}
+
+	function Process(url1, url2) {
+		document.getElementById('firstPageButtons').style.display = 'none';
+		document.getElementById('loaderDiv').style.display = 'block';
+		//Reference the FileUpload element.
+			var fileUpload1 = document.getElementById("id_file_source_1");
+			var fileUpload2 = document.getElementById("id_file_source_2");
+			document.getElementById("REFFILEVal").innerHTML=localStorage.getItem("f1");
+            document.getElementById("CURRFILEVal").innerHTML=localStorage.getItem("f2");
+            
+			url1 = url1 +"?" + (new Date()).getTime();
+			url2 = url2 +"?" + (new Date()).getTime();
+			
+			file_1_path = url1;
+			file_2_path = url2;
+			// console.log(url1, url2);
+			var refReq = new XMLHttpRequest();
+			refReq.open("GET", file_1_path , true);
+			refReq.responseType = "arraybuffer";
+			refReq.onload = function (e) {
+				var arraybuffer = refReq.response;
+				var data = new Uint8Array(arraybuffer);
+				var arr = new Array();
+				for (var i = 0; i != data.length; ++i)
+					arr[i] = String.fromCharCode(data[i]);
+				var bstr = arr.join("");
+				data1 = ProcessExcel(bstr);
+			}
+			refReq.send();
+			
+			var tarReq = new XMLHttpRequest();
+			tarReq.open("GET", file_2_path, true);
+			tarReq.responseType = "arraybuffer";
+			tarReq.onload = function (e) {
+				var arraybuffer = tarReq.response;
+				var data = new Uint8Array(arraybuffer);
+				var arr = new Array();
+				for (var i = 0; i != data.length; ++i)
+					arr[i] = String.fromCharCode(data[i]);
+				var bstr = arr.join("");
+				data2 = ProcessExcel(bstr);
+			}
+			tarReq.send();
+
+		//} else {
+		//	alert("Please upload a valid Excel file.");
+		//	return;
+		//}
+		var selectArr = [{
+				name: 'All Items',
+				value: 0
+			}, {
+				name: 'Deleted Items',
+				value: 1
+			}, {
+				name: 'New Items',
+				value: 2
+			}, {
+				name: 'Different Items',
+				value: 3
+			}, {
+				name: 'Similar Items',
+				value: 4
+			}
+		];
+		for (var i = 0; i < selectArr.length; i++) {
+			var option = document.createElement("option");
+			option.text = selectArr[i].name;
+			option.value = selectArr[i].value;
+			var select = document.getElementById("Select");
+			select.appendChild(option);
+		}
+
+		var timer = setInterval(()=>{
+                if(data1.length && data2.length){
+                    clearInterval(timer);
+                    createDropDownList();
+                }
+            }, 100);
+		
+	};
+
+	function createDropDownList() {
+	 // console.log(data1, data2);		
+	 
+		$.ajaxSetup({
+			cache: false
+		});
+		var json = JSON.parse($.getJSON({
+					'url': "/static/mrt/RegionCountry.json",
+					'async': false
+				}).responseText);
+		
+		var uniqueCountry = {};
+		var multipleNameCountriesMap = {};
+		for (var key in json){
+			var data = json[key];
+			for (var i = 0; i < data.length; i++) {
+					for (var j = 0; j < data[i].length; j++) {
+					var str = data[i][j].replace(/[\r\n]+/g,"");
+						str = str.replace(/ +/g, '');
+						str = str.trim();
+						multipleNameCountriesMap[str] = [data[i][0], key];
+					}
+			}
+		}
+		// console.log('multipleNameCountriesMap', multipleNameCountriesMap);
+		for (var i = 0; i < data1.length; i++) {
+			for(var key in data1[i]) {
+				//data1[i][key] != undefined && // console.log(i, data1[i][key].toUpperCase(), 'Details'.toUpperCase(), data1[i][key].toUpperCase() == 'Details'.toUpperCase(), data1[i][key], '세부항목', data1[i][key] == '세부항목', typeof('세부항목'), typeof(data1[i][key]));
+				if(data1[i][key] != undefined && data1[i][key].toUpperCase() == 'ITEM'.toUpperCase()) {
+					refDetailHeaderCol = key;
+					refCol = i;
+					refRegionRow = i;
+				}
+				if(data1[i][key] != undefined && data1[i][key].toUpperCase() == 'FUNCTION') {
+					console.log('refFunCol found');
+					refFunCol = key;
+				}
+				if(refRegionRow >= 0 && refFunCol != -1 && refDetailHeaderCol != null) break;
+			}
+			if(refRegionRow >= 0 && refFunCol != -1 && refDetailHeaderCol != null) break;
+		}
+		
+		var refData = data1[refRegionRow];
+		// console.log(refRegionRow, refDetailHeaderCol, refData);
+		
+		for (var i = 0; i < data2.length; i++) {
+			for(var key in data2[i]) {
+				//data2[i][key] != undefined && // console.log(i, data2[i][key].toUpperCase(), 'Details'.toUpperCase(), data2[i][key].toUpperCase() == 'Details'.toUpperCase(), data2[i][key], '세부항목', data2[i][key] == '세부항목');
+				if(data2[i][key] != undefined && data2[i][key].toUpperCase() == 'ITEM'.toUpperCase()) {
+					tarDetailHeaderCol = key;
+					tarCol = i;
+					tarRegionRow = i;
+				}
+				if(data2[i][key] != undefined && data2[i][key].toUpperCase() == 'FUNCTION') {
+					console.log('tarFunCol found');
+					tarFunCol = key;
+				}
+				if(tarRegionRow >= 0 && tarFunCol != -1 && tarDetailHeaderCol != null) break;
+			}
+			if(tarRegionRow >= 0 && tarFunCol != -1 && tarDetailHeaderCol != null) break;
+		}
+		
+		var tarData = data2[tarRegionRow];
+		// console.log(tarData, tarRegionRow);
+		var startFromHere = 0;
+		var returnFromHere = 0;
+		for (var key in refData) {
+			if(refData[key].toUpperCase() == "Characteristic Info".toUpperCase())returnFromHere = 1;
+			if(returnFromHere == 1)break;
+			if(startFromHere == 1){
+				if(filterValues[refData[key]] == undefined)
+					filterValues[refData[key]] = {};
+				filterValues[refData[key]].REF = key;
+			}
+			if(refData[key].toUpperCase() == "Input Type".toUpperCase())startFromHere = 1;
+		}
+		
+		startFromHere = 0;
+		returnFromHere = 0;
+		
+		for (var key in tarData) {
+			if(tarData[key].toUpperCase() == "Characteristic Info".toUpperCase())returnFromHere = 1;
+			if(returnFromHere == 1)break;
+			if(startFromHere == 1){
+				if(filterValues[tarData[key]] == undefined)
+					filterValues[tarData[key]] = {};
+				filterValues[tarData[key]].TAR = key;
+			}
+			if(tarData[key].toUpperCase() == "Input Type".toUpperCase())startFromHere = 1;
+		}
+		// console.log(filterValues);
+		var firstKey = null;
+		var select1 = document.getElementById("filter1");
+		var select2 = document.getElementById("filter2");
+		for (var key in filterValues) {
+			if(filterValues[key].REF != undefined){
+				var option = document.createElement("option");
+				option.text = key;
+				option.value = key;
+				select1.appendChild(option);
+			}
+			if(filterValues[key].TAR != undefined){
+				var option = document.createElement("option");
+				option.text = key;
+				option.value = key;
+				select2.appendChild(option);
+			}
+		}
+		//getSelect();
+		document.getElementById('filterDiv').style.display = 'block';
+		document.getElementById('loaderDiv').style.display = 'none';
+		var elem = document.getElementById("loaderDiv");
+		elem.parentElement.removeChild(elem);
+		// // console.log('hello');
+		//window.location.href = 'table_filter.html';
+		
+	};
+
+	function getSelect() {
+		var cbh = document.getElementById('checkbox');
+		cbh.innerHTML = '';
+		for (var i in filterValues) {
+			var divEl = document.createElement('div');
+			divEl.setAttribute('id', 'id' + i);
+			cbh.appendChild(divEl);
+		}
+		for (var i in filterValues) {
+			cbh = document.getElementById('id' + i);
+			var cb = document.createElement('input');
+			cb.type = 'checkbox';
+			cbh.appendChild(cb);
+			cb.id = cb.value = cb.name = i;
+			cbh.appendChild(document.createTextNode(cb.name));
+		};
+	}
+
+	function Compare() {
+		var filter1SelectedValue = document.getElementById("filter1").value;
+		var filter2SelectedValue = document.getElementById("filter2").value;
+		if(!refFunCol)refFunCol = '__EMPTY_1000';
+		if(!tarFunCol)tarFunCol = '__EMPTY_1000';
+		console.log(refFunCol, tarFunCol);
+		// console.log(filter1SelectedValue, filter2SelectedValue);
+		var dataMapArray = {};
+		var tableHeaderArr = [];
+		// // console.log(filter1SelectedValue, filterValues[filter1SelectedValue]);
+		//for (var j in filterValues) {
+			//var el = document.getElementById(j);
+			//var name = j;
+			var key = filterValues[filter1SelectedValue].REF;
+			if(key == undefined)key = '__EMPTY_1000';
+			//if (el.checked) {
+				// console.log('key', key);
+				tableHeaderArr.push(filter1SelectedValue);
+				for (var i = refCol + 2; i < data1.length; i++) {
+				data1[i][refDetailHeaderCol] = data1[i][refDetailHeaderCol] == undefined ? '' : data1[i][refDetailHeaderCol].trim();
+					if (data1[i][refDetailHeaderCol] != undefined) {
+						if (dataMapArray[data1[i][refDetailHeaderCol]] == undefined)
+							dataMapArray[data1[i][refDetailHeaderCol]] = {};
+						dataMapArray[data1[i][refDetailHeaderCol]]['REF'] = data1[i][key] == undefined ? '' : data1[i][key];
+						dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = data1[i][refFunCol];
+						if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '개발지원')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Development Support';
+					else if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '기구')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Mech.';
+					else if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '회로')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Circuit';
+					}
+				}
+				key = filterValues[filter2SelectedValue].TAR;
+				if(key == undefined)key = '__EMPTY_1000';
+				tableHeaderArr.push(filter2SelectedValue);
+				// console.log('key', key);
+				for (var i = tarCol + 2; i < data2.length; i++) {
+				data2[i][tarDetailHeaderCol] = data2[i][tarDetailHeaderCol] == undefined ? '' : data2[i][tarDetailHeaderCol].trim();
+					if (data2[i][tarDetailHeaderCol] != undefined) {
+						if (dataMapArray[data2[i][tarDetailHeaderCol]] == undefined)
+							dataMapArray[data2[i][tarDetailHeaderCol]] = {};
+						dataMapArray[data2[i][tarDetailHeaderCol]]['TAR'] = data2[i][key] == undefined ? '' : data2[i][key];
+						if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == undefined) dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = data2[i][tarFunCol] == undefined ? '--' : data2[i][tarFunCol];
+						if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '개발지원')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Development Support';
+					else if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '기구')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Mech.';
+					else if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '회로')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Circuit';
+					}
+				}
+			//}
+		//}
+
+		// console.log(dataMapArray,tableHeaderArr);
+
+		// tableHeaderArr = tableHeaderArr.sort();
+		var dvExcel = document.getElementById("dvExcel");
+		var table = document.createElement("table");
+		var hdExcel = document.getElementById("hdExcel");
+		var headertable = document.createElement("table");
+		var thead = document.createElement("thead");
+		var tbody = document.createElement("tbody");
+		table.border = "1";
+		table.setAttribute('id', 'myTable');
+		headertable.setAttribute('id', 'myTable1');
+		var row = thead.insertRow(-1);
+		var headerCell = document.createElement("TH");
+		headerCell.className = 'detailCol';
+		headerCell.innerHTML = 'Model';
+		row.appendChild(headerCell);
+		headerCell = document.createElement("TH");
+		headerCell.className = 'detailCol';
+		headerCell.innerHTML = 'Parameter';
+		row.appendChild(headerCell);
+		for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = tableHeaderArr[i];
+			//headerCell.setAttribute('colspan', 2);
+			row.appendChild(headerCell);
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = tableHeaderArr[i + 1];
+			//headerCell.setAttribute('colspan', 2);
+			row.appendChild(headerCell);
+		}
+		row = thead.insertRow(-1);
+		headerCell = document.createElement("TH");
+		headerCell.innerHTML = "Details";
+		headerCell.className = 'detailCol';
+		row.appendChild(headerCell);
+		headerCell = document.createElement("TH");
+		headerCell.innerHTML = "Function";
+		headerCell.className = 'detailCol';
+		row.appendChild(headerCell);
+		for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+			headerCell = document.createElement("TH");
+			headerCell.className = 'headerRow';
+			headerCell.innerHTML = "Reference";
+			row.appendChild(headerCell);
+
+			headerCell = document.createElement("TH");
+			headerCell.className = 'headerRow';
+			headerCell.innerHTML = "Current";
+			row.appendChild(headerCell);
+		}
+		dvExcel.innerHTML = "";
+		hdExcel.innerHTML = "";
+		headertable.appendChild(thead);
+		table.appendChild(tbody);
+		dvExcel.appendChild(table);
+		hdExcel.appendChild(headertable);
+
+		var selectedValue = document.getElementById("Select").value;
+		for (var key in dataMapArray) {
+			var row = tbody.insertRow(-1);
+			var cell = row.insertCell(-1);
+			cell.className = 'detailCol';
+			cell.innerHTML = key.replace('.',':');;
+			var found = false;
+			for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+				//var name = tableHeaderArr[i];
+				if (selectedValue == 0) {
+					if (dataMapArray[key] != undefined) {
+						found = true;
+						cell = row.insertCell(-1);
+						cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+						cell = row.insertCell(-1);
+						if (dataMapArray[key].REF != undefined)
+							cell.innerHTML = dataMapArray[key].REF;
+						else {
+							cell.innerHTML = '---';
+						}
+						if (dataMapArray[key].REF != dataMapArray[key].TAR)
+							cell.className = 'diffCol';
+						cell = row.insertCell(-1);
+						if (dataMapArray[key].TAR != undefined)
+							cell.innerHTML = dataMapArray[key].TAR;
+						else {
+							cell.innerHTML = '---'
+						}
+						if (dataMapArray[key].REF != dataMapArray[key].TAR)
+							cell.className = 'diffCol';
+					}
+
+				} else if (selectedValue == 1) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR == undefined && dataMapArray[key].REF != undefined) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = dataMapArray[key].REF;
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = '---';
+						}
+					}
+				} else if (selectedValue == 2) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != undefined && dataMapArray[key].REF == undefined) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = '---';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = dataMapArray[key].TAR;
+						}
+					}
+				} else if (selectedValue == 3) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != dataMapArray[key].REF) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							if (dataMapArray[key].REF != undefined)
+								cell.innerHTML = dataMapArray[key].REF;
+							else
+								cell.innerHTML = '---';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							if (dataMapArray[key].TAR != undefined)
+								cell.innerHTML = dataMapArray[key].TAR;
+							else
+								cell.innerHTML = '---';
+						} else {
+							cell = row.insertCell(-1);
+							cell.innerHTML = 'Same';
+							cell = row.insertCell(-1);
+							cell.innerHTML = 'Same';
+						}
+					}
+				} else {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != undefined && dataMapArray[key].REF != undefined && dataMapArray[key].REF == dataMapArray[key].TAR) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].REF;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].TAR;
+						} else {
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = 'Not Same';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = 'Not Same';
+						}
+					}
+				}
+			}
+			if (!found)
+				tbody.deleteRow(-1);
+		}
+		var tableBodyData = table.innerHTML;
+		var tableHeaderData = headertable.innerHTML;
+		var tableExcel = document.createElement("table");
+		tableExcel.innerHTML = tableHeaderData + tableBodyData;
+		tableExcel.setAttribute('id', 'myTable1');
+		// console.log(tableExcel);
+		tableData = tableExcel;
+		document.getElementById('button1').style.display = 'block';
+		document.getElementById('myInput').style.display = 'block';
+		document.getElementById('dvExcel').style.display = 'block';
+		document.getElementById('hdExcel').style.display = 'block';
+	}
+	
+    function ProcessExcel(data) {
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
+ 
+        //Fetch the name of First Sheet.
+        var sheetsName = workbook.SheetNames;
+		for(var i = 0;i < sheetsName.length; i++){
+			if(sheetsName[i] == 'Master 사양' || sheetsName[i].toUpperCase() == 'Spec.'.toUpperCase()){
+				var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetsName[i]]);
+				var dataArr;
+				return (dataArr = [...excelRows]);
+			}
+		}
+    };
+
+	function pad(n) {
+    return n<10 ? '0'+n : n;
+}
+	
+	function exportTableToExcel(){
+		// // console.log(tableData);
+		var tableID = tableData;
+		var wb = XLSX.utils.table_to_book(tableData, {sheet:"Sheet JS"});
+		var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+        function s2ab(s) {
+                        var buf = new ArrayBuffer(s.length);
+                        var view = new Uint8Array(buf);
+                        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                        return buf;
+        }
+		const d = new Date();
+		const file = 'SpecDiff_'+d.getFullYear()+'_'+pad((d.getMonth()+1))+'_'+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+'.xlsx';
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), file);
+	}
+</script>
+
+
+</body></html>
