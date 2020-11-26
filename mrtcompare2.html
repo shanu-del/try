@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://107.108.175.239:8000/mrt/prt_prt_uni -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./mrtcompare2_files/PRT.css">
+
+</head><body onload="loadComplete()"><div class="Header">
+	 <a class="navbar-brand" href="http://107.108.175.239:8000/">Product Intelligence Portal</a>
+	 <a class="nav-item" href="http://107.108.175.239:8000/mrt/">Home</a>
+	 <h1>MRT/PRT Comparison Tool</h1>
+	 <a class="nav-item1" href="http://107.108.175.239:8000/mrt/universal" )="">User Input</a>
+	 <h2>  </h2>
+	 <a class="nav-item2" href="http://107.108.175.239:8000/mrt/universal_server" )="">System Input</a>
+</div>
+	
+	<div id="firstPageButtons" style="height: 100%; display: none;">
+		<div class="compare">
+			<p>Select files to compare the PRT</p>
+		</div>
+	
+				<div class="uploadfile">
+				
+				<form id="files" class="fisrt_form" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrfmiddlewaretoken" value="zTgmOhuDnkBE7uxh58laVlSkibygPol7i0KUme53Gf4M0gHyQD8vCHRK8OElYWbL">
+                
+                <br>
+                <button class="button btn-secondary" id="decrpyt_file" type="submit">Process</button>
+            </form>
+				<div id="toprocess">
+					<input type="button" id="upload" value="Process" onclick="Process()" hidden="hidden">
+		        </div>
+			</div>
+				
+		
+	</div>
+	
+	<div id="filterDiv" style="display: block; position: absolute;">
+		<div id="selectDiv">
+			<div id="country">CURRENT Option
+			<select id="filter2"><option value="UA43T5310AKXXL">UA43T5310AKXXL</option></select>
+			</div>
+		
+		
+		
+			<div id="region">REFERENCE Option
+			<select id="filter1"><option value="UA32T4310AKXXL">UA32T4310AKXXL</option></select>	
+			</div>
+			
+			<div id="selecttask">Action</div>
+			<select id="Select"><option value="0">All Items</option><option value="1">Deleted Items</option><option value="2">New Items</option><option value="3">Different Items</option><option value="4">Similar Items</option></select>
+			<div id="result">Result</div>
+			<input type="button" id="upload1" value="Show Data" onclick="Compare()">
+			<button id="button1" onclick="exportTableToExcel()">Export Table Data To Excel File</button>
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for detail.." title="Type in a name" style="display: none;">
+			<div id="Legend"></div>
+			<label for="Legend" id="label">Different Items</label>
+			<div id="REFFILE">Reference File :	</div>
+			<div id="CURRFILE">Current File : </div>
+			<div id="REFFILEVal">UA32T4310AKXXL.xls</div>
+			<div id="CURRFILEVal">UA43T5310AKXXL.xls</div>
+		
+			
+		</div>
+	</div>
+	<div id="hdExcel"></div>
+	<div id="dvExcel"></div>
+	
+	
+
+
+
+
+
+
+<script type="text/javascript" src="./mrtcompare2_files/xlsx.full.min.js.download"></script>
+<script type="text/javascript" src="./mrtcompare2_files/jszip.js.download"></script>
+<script src="./mrtcompare2_files/filesaver.js.download"></script>
+<script src="./mrtcompare2_files/jquery-3.4.1.min.js.download"></script>
+<script type="text/javascript">
+var file_1_path
+var file_2_path
+
+function upload(event) {
+    event.preventDefault();
+    var data = new FormData($('form').get(0));
+	// console.log($('form').get(0));
+    // console.log("Working");
+	// console.log(data)
+
+	$.ajax({
+		// url: $(this).attr('action'),
+		url: "/mrt/upload",
+		type: $(this).attr('method'),
+		data: data,
+		dataType: 'json',
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+			// // console.log(data);
+			file_1_path = data['path_first_file'];
+			file_2_path = data['path_second_file'];
+			// console.log(file_1_path, file_2_path);
+			// console.log('success');
+
+			$('#upload').click();
+		}
+	});
+	
+	
+    return false;
+}
+
+$(function() {
+	// // console.log(file_1_path, file_2_path);
+    $('form').submit(upload);
+	
+});
+	var data1 = [];
+	var data2 = [];
+	var filterValues = {};
+	var tableData = null;
+	var multipleNameCountriesMap = {};
+	var refDetailHeaderCol = null;
+	var tarDetailHeaderCol = null;
+	var refRegionRow = -1;
+	var tarRegionRow = -1;
+	var refFunCol = -1;
+    var tarFunCol = -1;
+	var refCol = -1;
+	var tarCol = -1;
+	var fileName1 = 'Refernce';
+	var fileName2 = 'Target';
+	// const uploadButton = document.querySelector('.browse-btn');
+	// const uploadButton1 = document.querySelector('.browse-btn1');
+	// const fileInfo = document.querySelector('.file-info');
+	// const fileInfo1 = document.querySelector('.file-info1');
+	// const realInput = document.getElementById('fileUpload1');
+	// const realInput1 = document.getElementById('fileUpload2');
+
+	// uploadButton.addEventListener('click', (e) => {
+	//   realInput.click();
+	// });
+	// uploadButton1.addEventListener('click', (e) => {
+	//   realInput1.click();
+	// });
+
+	// realInput.addEventListener('change', () => {
+	//   const name = realInput.value.split(/\\|\//).pop();
+	//   const truncated = name.length > 20 
+	// 	? name.substr(name.length - 20) 
+	// 	: name;
+	  
+	//   fileInfo.innerHTML = truncated;
+	// });
+	// realInput1.addEventListener('change', () => {
+	//   const name = realInput1.value.split(/\\|\//).pop();
+	//   const truncated = name.length > 20 
+	// 	? name.substr(name.length - 20) 
+	// 	: name;
+	  
+	//   fileInfo1.innerHTML = truncated;
+	// });
+	
+	
+	document.getElementById('loaderDiv').style.display = 'none';
+	function myFunction() {
+		// console.log('hello');
+		var input,
+		filter,
+		table,
+		tr,
+		td,
+		i,
+		txtValue;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
+	
+function loadComplete() {
+		var url1 = localStorage.getItem("url1");
+		var url2 =localStorage.getItem("url2");
+		Process(url1, url2);
+	}
+
+	function Process(url1, url2) {
+		document.getElementById('firstPageButtons').style.display = 'none';
+		document.getElementById('loaderDiv').style.display = 'block';
+		//Reference the FileUpload element.
+			var fileUpload1 = document.getElementById("id_file_source_1");
+			var fileUpload2 = document.getElementById("id_file_source_2");
+			document.getElementById("REFFILEVal").innerHTML=localStorage.getItem("f1");
+            document.getElementById("CURRFILEVal").innerHTML=localStorage.getItem("f2");
+            
+			url1 = url1 +"?" + (new Date()).getTime();
+			url2 = url2 +"?" + (new Date()).getTime();
+			
+			file_1_path = url1;
+			file_2_path = url2;
+			// console.log(url1, url2);
+			var refReq = new XMLHttpRequest();
+			refReq.open("GET", file_1_path , true);
+			refReq.responseType = "arraybuffer";
+			refReq.onload = function (e) {
+				var arraybuffer = refReq.response;
+				var data = new Uint8Array(arraybuffer);
+				var arr = new Array();
+				for (var i = 0; i != data.length; ++i)
+					arr[i] = String.fromCharCode(data[i]);
+				var bstr = arr.join("");
+				data1 = ProcessExcel(bstr);
+			}
+			refReq.send();
+			
+			var tarReq = new XMLHttpRequest();
+			tarReq.open("GET", file_2_path, true);
+			tarReq.responseType = "arraybuffer";
+			tarReq.onload = function (e) {
+				var arraybuffer = tarReq.response;
+				var data = new Uint8Array(arraybuffer);
+				var arr = new Array();
+				for (var i = 0; i != data.length; ++i)
+					arr[i] = String.fromCharCode(data[i]);
+				var bstr = arr.join("");
+				data2 = ProcessExcel(bstr);
+			}
+			tarReq.send();
+
+		//} else {
+		//	alert("Please upload a valid Excel file.");
+		//	return;
+		//}
+		var selectArr = [{
+				name: 'All Items',
+				value: 0
+			}, {
+				name: 'Deleted Items',
+				value: 1
+			}, {
+				name: 'New Items',
+				value: 2
+			}, {
+				name: 'Different Items',
+				value: 3
+			}, {
+				name: 'Similar Items',
+				value: 4
+			}
+		];
+		for (var i = 0; i < selectArr.length; i++) {
+			var option = document.createElement("option");
+			option.text = selectArr[i].name;
+			option.value = selectArr[i].value;
+			var select = document.getElementById("Select");
+			select.appendChild(option);
+		}
+
+		var timer = setInterval(()=>{
+                if(data1.length && data2.length){
+                    clearInterval(timer);
+                    createDropDownList();
+                }
+            }, 100);
+		
+	};
+
+	function createDropDownList() {
+	 // console.log(data1, data2);		
+	 
+		$.ajaxSetup({
+			cache: false
+		});
+		var json = JSON.parse($.getJSON({
+					'url': "/static/mrt/RegionCountry.json",
+					'async': false
+				}).responseText);
+		
+		var uniqueCountry = {};
+		var multipleNameCountriesMap = {};
+		for (var key in json){
+			var data = json[key];
+			for (var i = 0; i < data.length; i++) {
+					for (var j = 0; j < data[i].length; j++) {
+					var str = data[i][j].replace(/[\r\n]+/g,"");
+						str = str.replace(/ +/g, '');
+						str = str.trim();
+						multipleNameCountriesMap[str] = [data[i][0], key];
+					}
+			}
+		}
+		// console.log('multipleNameCountriesMap', multipleNameCountriesMap);
+		for (var i = 0; i < data1.length; i++) {
+			for(var key in data1[i]) {
+				//data1[i][key] != undefined && // console.log(i, data1[i][key].toUpperCase(), 'Details'.toUpperCase(), data1[i][key].toUpperCase() == 'Details'.toUpperCase(), data1[i][key], '세부항목', data1[i][key] == '세부항목', typeof('세부항목'), typeof(data1[i][key]));
+				if(data1[i][key] != undefined && data1[i][key].toUpperCase() == 'ITEM'.toUpperCase()) {
+					refDetailHeaderCol = key;
+					refCol = i;
+					refRegionRow = i;
+				}
+				if(data1[i][key] != undefined && data1[i][key].toUpperCase() == 'FUNCTION') {
+					console.log('refFunCol found');
+					refFunCol = key;
+				}
+				if(refRegionRow >= 0 && refFunCol != -1 && refDetailHeaderCol != null) break;
+			}
+			if(refRegionRow >= 0 && refFunCol != -1 && refDetailHeaderCol != null) break;
+		}
+		
+		var refData = data1[refRegionRow];
+		// console.log(refRegionRow, refDetailHeaderCol, refData);
+		
+		for (var i = 0; i < data2.length; i++) {
+			for(var key in data2[i]) {
+				//data2[i][key] != undefined && // console.log(i, data2[i][key].toUpperCase(), 'Details'.toUpperCase(), data2[i][key].toUpperCase() == 'Details'.toUpperCase(), data2[i][key], '세부항목', data2[i][key] == '세부항목');
+				if(data2[i][key] != undefined && data2[i][key].toUpperCase() == 'ITEM'.toUpperCase()) {
+					tarDetailHeaderCol = key;
+					tarCol = i;
+					tarRegionRow = i;
+				}
+				if(data2[i][key] != undefined && data2[i][key].toUpperCase() == 'FUNCTION') {
+					console.log('tarFunCol found');
+					tarFunCol = key;
+				}
+				if(tarRegionRow >= 0 && tarFunCol != -1 && tarDetailHeaderCol != null) break;
+			}
+			if(tarRegionRow >= 0 && tarFunCol != -1 && tarDetailHeaderCol != null) break;
+		}
+		
+		var tarData = data2[tarRegionRow];
+		// console.log(tarData, tarRegionRow);
+		var startFromHere = 0;
+		var returnFromHere = 0;
+		for (var key in refData) {
+			if(refData[key].toUpperCase() == "Characteristic Info".toUpperCase())returnFromHere = 1;
+			if(returnFromHere == 1)break;
+			if(startFromHere == 1){
+				if(filterValues[refData[key]] == undefined)
+					filterValues[refData[key]] = {};
+				filterValues[refData[key]].REF = key;
+			}
+			if(refData[key].toUpperCase() == "Input Type".toUpperCase())startFromHere = 1;
+		}
+		
+		startFromHere = 0;
+		returnFromHere = 0;
+		
+		for (var key in tarData) {
+			if(tarData[key].toUpperCase() == "Characteristic Info".toUpperCase())returnFromHere = 1;
+			if(returnFromHere == 1)break;
+			if(startFromHere == 1){
+				if(filterValues[tarData[key]] == undefined)
+					filterValues[tarData[key]] = {};
+				filterValues[tarData[key]].TAR = key;
+			}
+			if(tarData[key].toUpperCase() == "Input Type".toUpperCase())startFromHere = 1;
+		}
+		// console.log(filterValues);
+		var firstKey = null;
+		var select1 = document.getElementById("filter1");
+		var select2 = document.getElementById("filter2");
+		for (var key in filterValues) {
+			if(filterValues[key].REF != undefined){
+				var option = document.createElement("option");
+				option.text = key;
+				option.value = key;
+				select1.appendChild(option);
+			}
+			if(filterValues[key].TAR != undefined){
+				var option = document.createElement("option");
+				option.text = key;
+				option.value = key;
+				select2.appendChild(option);
+			}
+		}
+		//getSelect();
+		document.getElementById('filterDiv').style.display = 'block';
+		document.getElementById('loaderDiv').style.display = 'none';
+		var elem = document.getElementById("loaderDiv");
+		elem.parentElement.removeChild(elem);
+		// // console.log('hello');
+		//window.location.href = 'table_filter.html';
+		
+	};
+
+	function getSelect() {
+		var cbh = document.getElementById('checkbox');
+		cbh.innerHTML = '';
+		for (var i in filterValues) {
+			var divEl = document.createElement('div');
+			divEl.setAttribute('id', 'id' + i);
+			cbh.appendChild(divEl);
+		}
+		for (var i in filterValues) {
+			cbh = document.getElementById('id' + i);
+			var cb = document.createElement('input');
+			cb.type = 'checkbox';
+			cbh.appendChild(cb);
+			cb.id = cb.value = cb.name = i;
+			cbh.appendChild(document.createTextNode(cb.name));
+		};
+	}
+
+	function Compare() {
+		var filter1SelectedValue = document.getElementById("filter1").value;
+		var filter2SelectedValue = document.getElementById("filter2").value;
+		if(!refFunCol)refFunCol = '__EMPTY_1000';
+		if(!tarFunCol)tarFunCol = '__EMPTY_1000';
+		console.log(refFunCol, tarFunCol);
+		// console.log(filter1SelectedValue, filter2SelectedValue);
+		var dataMapArray = {};
+		var tableHeaderArr = [];
+		// // console.log(filter1SelectedValue, filterValues[filter1SelectedValue]);
+		//for (var j in filterValues) {
+			//var el = document.getElementById(j);
+			//var name = j;
+			var key = filterValues[filter1SelectedValue].REF;
+			if(key == undefined)key = '__EMPTY_1000';
+			//if (el.checked) {
+				// console.log('key', key);
+				tableHeaderArr.push(filter1SelectedValue);
+				for (var i = refCol + 2; i < data1.length; i++) {
+				data1[i][refDetailHeaderCol] = data1[i][refDetailHeaderCol] == undefined ? '' : data1[i][refDetailHeaderCol].trim();
+					if (data1[i][refDetailHeaderCol] != undefined) {
+						if (dataMapArray[data1[i][refDetailHeaderCol]] == undefined)
+							dataMapArray[data1[i][refDetailHeaderCol]] = {};
+						dataMapArray[data1[i][refDetailHeaderCol]]['REF'] = data1[i][key] == undefined ? '' : data1[i][key];
+						dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = data1[i][refFunCol];
+						if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '개발지원')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Development Support';
+					else if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '기구')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Mech.';
+					else if(dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] == '회로')
+					dataMapArray[data1[i][refDetailHeaderCol]]['FUN'] = 'Circuit';
+					}
+				}
+				key = filterValues[filter2SelectedValue].TAR;
+				if(key == undefined)key = '__EMPTY_1000';
+				tableHeaderArr.push(filter2SelectedValue);
+				// console.log('key', key);
+				for (var i = tarCol + 2; i < data2.length; i++) {
+				data2[i][tarDetailHeaderCol] = data2[i][tarDetailHeaderCol] == undefined ? '' : data2[i][tarDetailHeaderCol].trim();
+					if (data2[i][tarDetailHeaderCol] != undefined) {
+						if (dataMapArray[data2[i][tarDetailHeaderCol]] == undefined)
+							dataMapArray[data2[i][tarDetailHeaderCol]] = {};
+						dataMapArray[data2[i][tarDetailHeaderCol]]['TAR'] = data2[i][key] == undefined ? '' : data2[i][key];
+						if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == undefined) dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = data2[i][tarFunCol] == undefined ? '--' : data2[i][tarFunCol];
+						if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '개발지원')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Development Support';
+					else if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '기구')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Mech.';
+					else if(dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] == '회로')
+					dataMapArray[data2[i][tarDetailHeaderCol]]['FUN'] = 'Circuit';
+					}
+				}
+			//}
+		//}
+
+		// console.log(dataMapArray,tableHeaderArr);
+
+		// tableHeaderArr = tableHeaderArr.sort();
+		var dvExcel = document.getElementById("dvExcel");
+		var table = document.createElement("table");
+		var hdExcel = document.getElementById("hdExcel");
+		var headertable = document.createElement("table");
+		var thead = document.createElement("thead");
+		var tbody = document.createElement("tbody");
+		table.border = "1";
+		table.setAttribute('id', 'myTable');
+		headertable.setAttribute('id', 'myTable1');
+		var row = thead.insertRow(-1);
+		var headerCell = document.createElement("TH");
+		headerCell.className = 'detailCol';
+		headerCell.innerHTML = 'Model';
+		row.appendChild(headerCell);
+		headerCell = document.createElement("TH");
+		headerCell.className = 'detailCol';
+		headerCell.innerHTML = 'Parameter';
+		row.appendChild(headerCell);
+		for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = tableHeaderArr[i];
+			//headerCell.setAttribute('colspan', 2);
+			row.appendChild(headerCell);
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = tableHeaderArr[i + 1];
+			//headerCell.setAttribute('colspan', 2);
+			row.appendChild(headerCell);
+		}
+		row = thead.insertRow(-1);
+		headerCell = document.createElement("TH");
+		headerCell.innerHTML = "Details";
+		headerCell.className = 'detailCol';
+		row.appendChild(headerCell);
+		headerCell = document.createElement("TH");
+		headerCell.innerHTML = "Function";
+		headerCell.className = 'detailCol';
+		row.appendChild(headerCell);
+		for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+			headerCell = document.createElement("TH");
+			headerCell.className = 'headerRow';
+			headerCell.innerHTML = "Reference";
+			row.appendChild(headerCell);
+
+			headerCell = document.createElement("TH");
+			headerCell.className = 'headerRow';
+			headerCell.innerHTML = "Current";
+			row.appendChild(headerCell);
+		}
+		dvExcel.innerHTML = "";
+		hdExcel.innerHTML = "";
+		headertable.appendChild(thead);
+		table.appendChild(tbody);
+		dvExcel.appendChild(table);
+		hdExcel.appendChild(headertable);
+
+		var selectedValue = document.getElementById("Select").value;
+		for (var key in dataMapArray) {
+			var row = tbody.insertRow(-1);
+			var cell = row.insertCell(-1);
+			cell.className = 'detailCol';
+			cell.innerHTML = key.replace('.',':');;
+			var found = false;
+			for (var i = 0; i < tableHeaderArr.length - 1; i++) {
+				//var name = tableHeaderArr[i];
+				if (selectedValue == 0) {
+					if (dataMapArray[key] != undefined) {
+						found = true;
+						cell = row.insertCell(-1);
+						cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+						cell = row.insertCell(-1);
+						if (dataMapArray[key].REF != undefined)
+							cell.innerHTML = dataMapArray[key].REF;
+						else {
+							cell.innerHTML = '---';
+						}
+						if (dataMapArray[key].REF != dataMapArray[key].TAR)
+							cell.className = 'diffCol';
+						cell = row.insertCell(-1);
+						if (dataMapArray[key].TAR != undefined)
+							cell.innerHTML = dataMapArray[key].TAR;
+						else {
+							cell.innerHTML = '---'
+						}
+						if (dataMapArray[key].REF != dataMapArray[key].TAR)
+							cell.className = 'diffCol';
+					}
+
+				} else if (selectedValue == 1) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR == undefined && dataMapArray[key].REF != undefined) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = dataMapArray[key].REF;
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = '---';
+						}
+					}
+				} else if (selectedValue == 2) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != undefined && dataMapArray[key].REF == undefined) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = '---';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = dataMapArray[key].TAR;
+						}
+					}
+				} else if (selectedValue == 3) {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != dataMapArray[key].REF) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							if (dataMapArray[key].REF != undefined)
+								cell.innerHTML = dataMapArray[key].REF;
+							else
+								cell.innerHTML = '---';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							if (dataMapArray[key].TAR != undefined)
+								cell.innerHTML = dataMapArray[key].TAR;
+							else
+								cell.innerHTML = '---';
+						} else {
+							cell = row.insertCell(-1);
+							cell.innerHTML = 'Same';
+							cell = row.insertCell(-1);
+							cell.innerHTML = 'Same';
+						}
+					}
+				} else {
+					if (dataMapArray[key] != undefined) {
+						if (dataMapArray[key].TAR != undefined && dataMapArray[key].REF != undefined && dataMapArray[key].REF == dataMapArray[key].TAR) {
+							found = true;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].FUN ? dataMapArray[key].FUN : '-';
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].REF;
+							cell = row.insertCell(-1);
+							cell.innerHTML = dataMapArray[key].TAR;
+						} else {
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = 'Not Same';
+							cell = row.insertCell(-1);
+							cell.className = 'diffCol';
+							cell.innerHTML = 'Not Same';
+						}
+					}
+				}
+			}
+			if (!found)
+				tbody.deleteRow(-1);
+		}
+		var tableBodyData = table.innerHTML;
+		var tableHeaderData = headertable.innerHTML;
+		var tableExcel = document.createElement("table");
+		tableExcel.innerHTML = tableHeaderData + tableBodyData;
+		tableExcel.setAttribute('id', 'myTable1');
+		// console.log(tableExcel);
+		tableData = tableExcel;
+		document.getElementById('button1').style.display = 'block';
+		document.getElementById('myInput').style.display = 'block';
+		document.getElementById('dvExcel').style.display = 'block';
+		document.getElementById('hdExcel').style.display = 'block';
+	}
+	
+    function ProcessExcel(data) {
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
+ 
+        //Fetch the name of First Sheet.
+        var sheetsName = workbook.SheetNames;
+		for(var i = 0;i < sheetsName.length; i++){
+			if(sheetsName[i] == 'Master 사양' || sheetsName[i].toUpperCase() == 'Spec.'.toUpperCase()){
+				var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetsName[i]]);
+				var dataArr;
+				return (dataArr = [...excelRows]);
+			}
+		}
+    };
+
+	function pad(n) {
+    return n<10 ? '0'+n : n;
+}
+	
+	function exportTableToExcel(){
+		// // console.log(tableData);
+		var tableID = tableData;
+		var wb = XLSX.utils.table_to_book(tableData, {sheet:"Sheet JS"});
+		var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+        function s2ab(s) {
+                        var buf = new ArrayBuffer(s.length);
+                        var view = new Uint8Array(buf);
+                        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                        return buf;
+        }
+		const d = new Date();
+		const file = 'SpecDiff_'+d.getFullYear()+'_'+pad((d.getMonth()+1))+'_'+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+'.xlsx';
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), file);
+	}
+</script>
+
+
+</body></html>
